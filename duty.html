@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>今日值日</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      background-color: #fff;
+      padding: 40px 60px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+    h1 {
+      color: #007bff;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    #date-info {
+      font-size: 1.2em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .duty-number {
+      font-size: 8em;
+      font-weight: bold;
+      color: #28a745;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>今日值日</h1>
+    <div id="date-info"></div>
+    <div class="duty-number" id="duty-number"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const startDate = new Date('2025-09-08');
+      const today = new Date();
+      
+      // 计算从开始日期到今天经过的天数
+      const oneDay = 1000 * 60 * 60 * 24;
+      const daysSinceStart = Math.floor((today - startDate) / oneDay);
+      
+      // 值日序号从 1 开始，所以需要 +1
+      const dutyNumber = ((daysSinceStart) % 5) + 1;
+
+      const dateInfo = document.getElementById('date-info');
+      const dutyNumberElement = document.getElementById('duty-number');
+
+      // 格式化日期显示
+      const formattedDate = today.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
+      });
+
+      dateInfo.textContent = formattedDate;
+      dutyNumberElement.textContent = dutyNumber;
+    });
+  </script>
+
+</body>
+</html>
